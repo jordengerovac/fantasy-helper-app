@@ -44,7 +44,10 @@ defmodule FantasyHelperApp.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:csv, "~> 2.3"},
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 5.0"}
+      {:poison, "~> 5.0"},
+      {:absinthe, "~> 1.6"},
+      {:absinthe_plug, "~> 1.5"},
+      {:uuid, "~>1.1.8"}
     ]
   end
 

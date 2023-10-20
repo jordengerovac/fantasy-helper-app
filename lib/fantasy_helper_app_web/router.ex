@@ -5,10 +5,20 @@ defmodule FantasyHelperAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/" do
+    pipe_through :api
+
+    forward "/graphql", Absinthe.Plug.GraphiQL,
+      schema: FantasyHelperAppWeb.Schema,
+      interface: :simple,
+      context: %{pubsub: FantasyHelperAppWeb.Endpoint}
+  end
+
   scope "/api", FantasyHelperAppWeb do
     pipe_through :api
     get "/", DefaultController, :index
   end
+
 
   scope "/players", FantasyHelperAppWeb do
     pipe_through :api
