@@ -188,6 +188,8 @@ defmodule FantasyHelperApp.Players do
       ]
     })
     headers = [{"Content-type", "application/json"}, {"Accept", "application/json"}, {"Authorization", "Bearer " <> System.get_env("CHAT_GPT_API_TOKEN")}]
-    HTTPoison.post(url, body, headers, [timeout: 50_000, recv_timeout: 50_000])
+    with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.post(url, body, headers, [timeout: 50_000, recv_timeout: 50_000]) do
+      Poison.decode!(body)
+    end
   end
 end

@@ -15,6 +15,13 @@ defmodule FantasyHelperAppWeb.PlayerJSON do
     %{data: data(player)}
   end
 
+   @doc """
+  Renders a json respnse.
+  """
+  def compare_players(%{response: response}) do
+    %{data: response}
+  end
+
   defp data(%Player{} = player) do
     %{
       id: player.id,

@@ -42,7 +42,11 @@ defmodule FantasyHelperAppWeb.PlayerController do
   end
 
   def compare_players(conn, %{"player1" => player1, "player2" => player2}) do
-    Players.compare_players_with_chat_gpt(player1, player2)
-    send_resp(conn, :no_content, "")
+    with response <- Players.compare_players_with_chat_gpt(player1, player2) do
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", ~p"/players/compare/#{player1}/#{player2}")
+      |> render(:compare_players, response: response)
+    end
   end
 end
