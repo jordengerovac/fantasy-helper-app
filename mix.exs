@@ -42,7 +42,9 @@ defmodule FantasyHelperApp.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
-      {:csv, "~> 2.3"}
+      {:csv, "~> 2.3"},
+      {:httpoison, "~> 2.0"},
+      {:poison, "~> 5.0"}
     ]
   end
 

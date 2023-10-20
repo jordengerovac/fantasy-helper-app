@@ -40,4 +40,9 @@ defmodule FantasyHelperAppWeb.PlayerController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def compare_players(conn, %{"player1" => player1, "player2" => player2}) do
+    Players.compare_players_with_chat_gpt(player1, player2)
+    send_resp(conn, :no_content, "")
+  end
 end

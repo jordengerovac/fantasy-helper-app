@@ -169,4 +169,25 @@ defmodule FantasyHelperApp.Players do
       create_player(%{name: name, position: position, games_played: games_played, team: team, type: type})
     end
   end
+
+  def compare_players_with_chat_gpt(player1, player2) do
+    IO.puts("Comparing " <> player1 <> " & " <> player2)
+
+    url = "https://api.openai.com/v1/chat/completions"
+    body = Poison.encode!(%{
+      model: "gpt-3.5-turbo",
+      messages: [
+        %{
+          role: "system",
+          content: "You are a helpful fantasy sports assistant for the MLB. I will give you two players and you will tell me which of the two is a better choice for a fantasy sports team with statistics from their last 10 games to back it up."
+        },
+        %{
+          role: "user",
+          content: player1 <> " or " <> player2
+        }
+      ]
+    })
+    headers = [{"Content-type", "application/json"}, {"Accept", "application/json"}, {"Authorization", "Bearer " <> System.get_env("CHAT_GPT_API_TOKEN")}]
+    HTTPoison.post(url, body, headers, [timeout: 50_000, recv_timeout: 50_000])
+  end
 end
