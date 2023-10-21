@@ -25,9 +25,24 @@ defmodule FantasyHelperAppWeb.Router do
     get "/", PlayerController, :index
   end
 
+  scope "/players", FantasyHelperAppWeb do
+    pipe_through :api
+    post "/", PlayerController, :create
+  end
+
+  scope "/players", FantasyHelperAppWeb do
+    pipe_through :api
+    put "/", PlayerController, :update
+  end
+
   scope "/players/:id", FantasyHelperAppWeb do
     pipe_through :api
     get "/", PlayerController, :show
+  end
+
+  scope "/players/:id", FantasyHelperAppWeb do
+    pipe_through :api
+    delete "/", PlayerController, :delete
   end
 
   scope "/players/compare/:player1/:player2", FantasyHelperAppWeb do
