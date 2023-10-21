@@ -7,10 +7,10 @@ defmodule FantasyHelperAppWeb.PlayerResolver do
 
   def get_player_by_id(_root, args, _info) do
     case Players.get_player!(args.id) do
-      {:ok, player} ->
+      nil ->
+        {:error, "player id #{args.id} not found"}
+      player ->
         {:ok, player}
-      _error ->
-        {:error, "could not find player"}
     end
   end
 

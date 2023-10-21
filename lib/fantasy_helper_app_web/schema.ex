@@ -17,7 +17,7 @@ defmodule FantasyHelperAppWeb.Schema do
     end
 
     @desc "Get player by id"
-    field :get_player_by_id, non_null(:player) do
+    field :player_by_id, non_null(:player) do
       arg :id, non_null(:id)
 
       resolve(&FantasyHelperAppWeb.PlayerResolver.get_player_by_id/3)
